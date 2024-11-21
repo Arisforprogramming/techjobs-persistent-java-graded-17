@@ -1,58 +1,84 @@
 package org.launchcode.techjobs.persistent.models;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
+//@Entity
+//public class Job extends AbstractEntity {
+//
+//    @ManyToOne
+//    private Employer employer;
+//
+//    public Employer getEmployer() {
+//
+//        return employer;
+//    }
+//
+//    public void setEmployer(Employer employer) {
+//        this.employer = employer;
+//    }
+//    public Job() {
+//    }
+//
+//    @ManyToMany(mappedBy = "jobs") // `mappedBy` refers to the "jobs" field in the Skill class
+//    private List<Skill> skills = new ArrayList<>();// Initialize with an empty list
+//
+//    // Initialize the id and value fields.
+//    public Job(Employer anEmployer, List<Skill> someSkills) {
+//        super();
+//        this.employer = anEmployer;
+//        this.skills = someSkills;
+//    }
+//    //(List<Job> jobs)
+//    // Getters and setters.
+//
+//    public List<Skill> getSkills() {
+//
+//        return skills;
+//    }
+//
+//    public void setSkills(List<Skill> skills) {
+//        this.skills = skills;
+//    }
+//
+//}
+
 @Entity
-public class Job {
+public class Job extends AbstractEntity{
 
-    @Id
-    @GeneratedValue
-    private int id;
+    @ManyToOne
+    private Employer employer;
 
-    private String name;
-    private String employer;
-    private String skills;
-
+    @ManyToMany
+    private List<Skill> skills = new ArrayList<>();
 
     public Job() {
     }
 
-    // Initialize the id and value fields.
-    public Job(String anEmployer, String someSkills) {
-        super();
-        this.employer = anEmployer;
-        this.skills = someSkills;
-    }
-
-    // Getters and setters.
-    
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmployer() {
-        return employer;
-    }
-
-    public void setEmployer(String employer) {
+    public Job(Employer employer, List<Skill> skills) {
         this.employer = employer;
-    }
-
-    public String getSkills() {
-        return skills;
-    }
-
-    public void setSkills(String skills) {
         this.skills = skills;
     }
 
+    // Getters and setters.
+
+    public Employer getEmployer() {
+        return employer;
+    }
+
+    public void setEmployer(Employer employer) {
+        this.employer = employer;
+    }
+
+    public List<Skill> getSkills() {
+        return skills;
+    }
+
+    public void setSkills(List<Skill> skills) {
+        this.skills = skills;
+    }
 }
+
